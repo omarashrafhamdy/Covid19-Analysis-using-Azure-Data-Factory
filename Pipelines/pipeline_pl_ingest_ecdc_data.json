@@ -1,0 +1,326 @@
+{
+  "Name": "pl_ingest_ecdc_data",
+  "Activities": [
+    {
+      "Source": {
+        "StoreSettings": {
+          "Recursive": true,
+          "WildcardFolderPath": null,
+          "WildcardFileName": null,
+          "Prefix": null,
+          "FileListPath": null,
+          "EnablePartitionDiscovery": false,
+          "PartitionRootPath": null,
+          "DeleteFilesAfterCompletion": null,
+          "ModifiedDatetimeStart": null,
+          "ModifiedDatetimeEnd": null,
+          "AdditionalProperties": {},
+          "MaxConcurrentConnections": null,
+          "DisableMetricsCollection": null
+        },
+        "FormatSettings": {
+          "CompressionProperties": null,
+          "AdditionalProperties": {}
+        },
+        "AdditionalColumns": null,
+        "SourceRetryCount": null,
+        "SourceRetryWait": null,
+        "MaxConcurrentConnections": null,
+        "DisableMetricsCollection": null
+      },
+      "Dataset": {
+        "ReferenceName": "ds_ecdc_file_list",
+        "Parameters": {}
+      },
+      "FirstRowOnly": false,
+      "LinkedServiceName": null,
+      "Policy": {
+        "AdditionalProperties": null,
+        "Timeout": "0.12:00:00",
+        "Retry": 0,
+        "RetryIntervalInSeconds": 30,
+        "SecureInput": false,
+        "SecureOutput": false
+      },
+      "AdditionalProperties": {
+        "typeProperties": {
+          "source": {
+            "type": "JsonSource",
+            "storeSettings": {
+              "type": "AzureBlobStorageReadSettings",
+              "recursive": true,
+              "enablePartitionDiscovery": false
+            },
+            "formatSettings": {
+              "type": "JsonReadSettings"
+            }
+          },
+          "dataset": {
+            "referenceName": "ds_ecdc_file_list",
+            "type": "DatasetReference",
+            "parameters": {}
+          },
+          "firstRowOnly": false
+        }
+      },
+      "Name": "Lookup ECDC File List",
+      "Description": null,
+      "State": null,
+      "OnInactiveMarkAs": null,
+      "DependsOn": [],
+      "UserProperties": []
+    },
+    {
+      "IsSequential": null,
+      "BatchCount": null,
+      "Items": {
+        "Value": "@activity('Lookup ECDC File List').output.value"
+      },
+      "Activities": [
+        {
+          "Inputs": [
+            {
+              "ReferenceName": "ds_ecdc_raw_csv_http",
+              "Parameters": {
+                "raltiveURL": {
+                  "value": "@item().sourceRelativeURL",
+                  "type": "Expression"
+                },
+                "baseURL": {
+                  "value": "@item().sourceBaseURL",
+                  "type": "Expression"
+                }
+              }
+            }
+          ],
+          "Outputs": [
+            {
+              "ReferenceName": "ds_ecdc_raw_csv_dl",
+              "Parameters": {
+                "fileName": {
+                  "value": "@item().sinkFileName",
+                  "type": "Expression"
+                }
+              }
+            }
+          ],
+          "StagingSettings": null,
+          "LogSettings": null,
+          "Source": {
+            "StoreSettings": {
+              "RequestMethod": "GET",
+              "RequestBody": null,
+              "AdditionalHeaders": null,
+              "RequestTimeout": null,
+              "AdditionalColumns": null,
+              "AdditionalProperties": {},
+              "MaxConcurrentConnections": null,
+              "DisableMetricsCollection": null
+            },
+            "FormatSettings": {
+              "SkipLineCount": null,
+              "CompressionProperties": null,
+              "AdditionalProperties": {}
+            },
+            "AdditionalColumns": null,
+            "SourceRetryCount": null,
+            "SourceRetryWait": null,
+            "MaxConcurrentConnections": null,
+            "DisableMetricsCollection": null
+          },
+          "Sink": {
+            "StoreSettings": {
+              "BlockSizeInMb": null,
+              "MaxConcurrentConnections": null,
+              "DisableMetricsCollection": null,
+              "CopyBehavior": null,
+              "Metadata": null
+            },
+            "FormatSettings": {
+              "QuoteAllText": true,
+              "FileExtension": ".txt",
+              "MaxRowsPerFile": null,
+              "FileNamePrefix": null,
+              "AdditionalProperties": {}
+            },
+            "WriteBatchSize": null,
+            "WriteBatchTimeout": null,
+            "SinkRetryCount": null,
+            "SinkRetryWait": null,
+            "MaxConcurrentConnections": null,
+            "DisableMetricsCollection": null
+          },
+          "Translator": {
+            "type": "TabularTranslator",
+            "typeConversion": true,
+            "typeConversionSettings": {
+              "allowDataTruncation": true,
+              "treatBooleanAsNumber": false
+            }
+          },
+          "EnableStaging": false,
+          "ParallelCopies": null,
+          "DataIntegrationUnits": null,
+          "EnableSkipIncompatibleRow": null,
+          "RedirectIncompatibleRowSettings": null,
+          "LogStorageSettings": null,
+          "PreserveRules": null,
+          "Preserve": null,
+          "ValidateDataConsistency": null,
+          "SkipErrorFile": null,
+          "LinkedServiceName": null,
+          "Policy": {
+            "AdditionalProperties": null,
+            "Timeout": "0.12:00:00",
+            "Retry": 0,
+            "RetryIntervalInSeconds": 30,
+            "SecureInput": false,
+            "SecureOutput": false
+          },
+          "AdditionalProperties": {
+            "typeProperties": {
+              "source": {
+                "type": "DelimitedTextSource",
+                "storeSettings": {
+                  "type": "HttpReadSettings",
+                  "requestMethod": "GET"
+                },
+                "formatSettings": {
+                  "type": "DelimitedTextReadSettings"
+                }
+              },
+              "sink": {
+                "type": "DelimitedTextSink",
+                "storeSettings": {
+                  "type": "AzureBlobFSWriteSettings"
+                },
+                "formatSettings": {
+                  "type": "DelimitedTextWriteSettings",
+                  "quoteAllText": true,
+                  "fileExtension": ".txt"
+                }
+              },
+              "enableStaging": false,
+              "translator": {
+                "type": "TabularTranslator",
+                "typeConversion": true,
+                "typeConversionSettings": {
+                  "allowDataTruncation": true,
+                  "treatBooleanAsNumber": false
+                }
+              }
+            }
+          },
+          "Name": "Copy ECDC Data",
+          "Description": null,
+          "State": null,
+          "OnInactiveMarkAs": null,
+          "DependsOn": [],
+          "UserProperties": []
+        }
+      ],
+      "AdditionalProperties": {
+        "typeProperties": {
+          "items": {
+            "value": "@activity('Lookup ECDC File List').output.value",
+            "type": "Expression"
+          },
+          "activities": [
+            {
+              "name": "Copy ECDC Data",
+              "type": "Copy",
+              "dependsOn": [],
+              "policy": {
+                "timeout": "0.12:00:00",
+                "retry": 0,
+                "retryIntervalInSeconds": 30,
+                "secureOutput": false,
+                "secureInput": false
+              },
+              "userProperties": [],
+              "typeProperties": {
+                "source": {
+                  "type": "DelimitedTextSource",
+                  "storeSettings": {
+                    "type": "HttpReadSettings",
+                    "requestMethod": "GET"
+                  },
+                  "formatSettings": {
+                    "type": "DelimitedTextReadSettings"
+                  }
+                },
+                "sink": {
+                  "type": "DelimitedTextSink",
+                  "storeSettings": {
+                    "type": "AzureBlobFSWriteSettings"
+                  },
+                  "formatSettings": {
+                    "type": "DelimitedTextWriteSettings",
+                    "quoteAllText": true,
+                    "fileExtension": ".txt"
+                  }
+                },
+                "enableStaging": false,
+                "translator": {
+                  "type": "TabularTranslator",
+                  "typeConversion": true,
+                  "typeConversionSettings": {
+                    "allowDataTruncation": true,
+                    "treatBooleanAsNumber": false
+                  }
+                }
+              },
+              "inputs": [
+                {
+                  "referenceName": "ds_ecdc_raw_csv_http",
+                  "type": "DatasetReference",
+                  "parameters": {
+                    "raltiveURL": {
+                      "value": "@item().sourceRelativeURL",
+                      "type": "Expression"
+                    },
+                    "baseURL": {
+                      "value": "@item().sourceBaseURL",
+                      "type": "Expression"
+                    }
+                  }
+                }
+              ],
+              "outputs": [
+                {
+                  "referenceName": "ds_ecdc_raw_csv_dl",
+                  "type": "DatasetReference",
+                  "parameters": {
+                    "fileName": {
+                      "value": "@item().sinkFileName",
+                      "type": "Expression"
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "Name": "Execute Copy For Every Record",
+      "Description": null,
+      "State": null,
+      "OnInactiveMarkAs": null,
+      "DependsOn": [
+        {
+          "AdditionalProperties": null,
+          "Activity": "Lookup ECDC File List",
+          "DependencyConditions": [
+            "Succeeded"
+          ]
+        }
+      ],
+      "UserProperties": []
+    }
+  ],
+  "Parameters": null,
+  "Id": "/subscriptions/f84a2822-7f27-4f44-982c-ca7ca3705fdd/resourceGroups/covid-reporting-rg/providers/Microsoft.DataFactory/factories/covid-reporting-an-datafactory/pipelines/pl_ingest_ecdc_data",
+  "ETag": "8b01aaf1-0000-1100-0000-661c6b9d0000",
+  "ResourceGroupName": "covid-reporting-rg",
+  "DataFactoryName": "covid-reporting-an-datafactory"
+}

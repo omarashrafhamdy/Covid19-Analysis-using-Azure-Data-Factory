@@ -1,0 +1,35 @@
+{
+  "Name": "ls_http_opendata_ecdc_europa_eu",
+  "Properties": {
+    "Url": "@{linkedService().sourceBaseURL}",
+    "AuthenticationType": "Anonymous",
+    "UserName": null,
+    "Password": null,
+    "AuthHeaders": {},
+    "EmbeddedCertData": null,
+    "CertThumbprint": null,
+    "EncryptedCredential": null,
+    "EnableServerCertificateValidation": true,
+    "AdditionalProperties": {
+      "typeProperties": {
+        "url": "@{linkedService().sourceBaseURL}",
+        "enableServerCertificateValidation": true,
+        "authenticationType": "Anonymous",
+        "authHeaders": {}
+      }
+    },
+    "ConnectVia": null,
+    "Description": null,
+    "Parameters": {
+      "sourceBaseURL": {
+        "Type": "string",
+        "DefaultValue": null
+      }
+    },
+    "Annotations": []
+  },
+  "Id": "/subscriptions/f84a2822-7f27-4f44-982c-ca7ca3705fdd/resourceGroups/covid-reporting-rg/providers/Microsoft.DataFactory/factories/covid-reporting-an-datafactory/linkedservices/ls_http_opendata_ecdc_europa_eu",
+  "ETag": "85016384-0000-1100-0000-661c00a10000",
+  "ResourceGroupName": "covid-reporting-rg",
+  "DataFactoryName": "covid-reporting-an-datafactory"
+}

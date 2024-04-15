@@ -1,0 +1,74 @@
+{
+  "Name": "pl_execute_population_pipelines",
+  "Activities": [
+    {
+      "Policy": {
+        "AdditionalProperties": null,
+        "SecureInput": false
+      },
+      "Pipeline": {
+        "ReferenceName": "pl_ingest_population_data",
+        "Name": null
+      },
+      "Parameters": {},
+      "WaitOnCompletion": true,
+      "AdditionalProperties": {
+        "typeProperties": {
+          "pipeline": {
+            "referenceName": "pl_ingest_population_data",
+            "type": "PipelineReference"
+          },
+          "waitOnCompletion": true,
+          "parameters": {}
+        }
+      },
+      "Name": "Execute Ingest Population Data",
+      "Description": null,
+      "State": null,
+      "OnInactiveMarkAs": null,
+      "DependsOn": [],
+      "UserProperties": []
+    },
+    {
+      "Policy": {
+        "AdditionalProperties": null,
+        "SecureInput": false
+      },
+      "Pipeline": {
+        "ReferenceName": "pl_process_population_data",
+        "Name": null
+      },
+      "Parameters": {},
+      "WaitOnCompletion": true,
+      "AdditionalProperties": {
+        "typeProperties": {
+          "pipeline": {
+            "referenceName": "pl_process_population_data",
+            "type": "PipelineReference"
+          },
+          "waitOnCompletion": true,
+          "parameters": {}
+        }
+      },
+      "Name": "Execute Process Population Data",
+      "Description": null,
+      "State": null,
+      "OnInactiveMarkAs": null,
+      "DependsOn": [
+        {
+          "AdditionalProperties": null,
+          "Activity": "Execute Ingest Population Data",
+          "DependencyConditions": [
+            "Succeeded"
+          ]
+        }
+      ],
+      "UserProperties": []
+    }
+  ],
+  "Parameters": null,
+  "Id": "/subscriptions/f84a2822-7f27-4f44-982c-ca7ca3705fdd/resourceGroups/covid-reporting-rg/providers/Microsoft.DataFactory/factories/covid-reporting-an-datafactory/pipelines/pl_execute_population_pipelines",
+  "ETag": "8c01a216-0000-1100-0000-661c6dc60000",
+  "ResourceGroupName": "covid-reporting-rg",
+  "DataFactoryName": "covid-reporting-an-datafactory"
+}

@@ -1,0 +1,38 @@
+{
+  "Name": "pl_process_population_data",
+  "Activities": [
+    {
+      "NotebookPath": "/covid/trans/transform-population-data",
+      "BaseParameters": null,
+      "Libraries": null,
+      "LinkedServiceName": {
+        "ReferenceName": "ls_db_covid_cluster",
+        "Parameters": null
+      },
+      "Policy": {
+        "AdditionalProperties": null,
+        "Timeout": "0.12:00:00",
+        "Retry": 0,
+        "RetryIntervalInSeconds": 30,
+        "SecureInput": false,
+        "SecureOutput": false
+      },
+      "AdditionalProperties": {
+        "typeProperties": {
+          "notebookPath": "/covid/trans/transform-population-data"
+        }
+      },
+      "Name": "Execute Population Transformation",
+      "Description": null,
+      "State": null,
+      "OnInactiveMarkAs": null,
+      "DependsOn": [],
+      "UserProperties": []
+    }
+  ],
+  "Parameters": null,
+  "Id": "/subscriptions/f84a2822-7f27-4f44-982c-ca7ca3705fdd/resourceGroups/covid-reporting-rg/providers/Microsoft.DataFactory/factories/covid-reporting-an-datafactory/pipelines/pl_process_population_data",
+  "ETag": "8b0192f1-0000-1100-0000-661c6b9c0000",
+  "ResourceGroupName": "covid-reporting-rg",
+  "DataFactoryName": "covid-reporting-an-datafactory"
+}

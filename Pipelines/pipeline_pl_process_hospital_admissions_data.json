@@ -1,0 +1,74 @@
+{
+  "Name": "pl_process_hospital_admissions_data",
+  "Activities": [
+    {
+      "DataFlow": {
+        "AdditionalProperties": null,
+        "ReferenceName": "df_transform_hospital_admissions",
+        "DatasetParameters": {
+          "HospitalAdmissionSource": {},
+          "CountrySource": {},
+          "DimDateSource": {},
+          "WeeklySink": {},
+          "DailySink": {}
+        },
+        "Parameters": {}
+      },
+      "Staging": {
+        "LinkedService": null,
+        "FolderPath": null
+      },
+      "IntegrationRuntime": null,
+      "Compute": {
+        "ComputeType": "General",
+        "CoreCount": 8
+      },
+      "TraceLevel": "Fine",
+      "ContinueOnError": null,
+      "RunConcurrently": null,
+      "SourceStagingConcurrency": null,
+      "LinkedServiceName": null,
+      "Policy": {
+        "AdditionalProperties": null,
+        "Timeout": "0.12:00:00",
+        "Retry": 0,
+        "RetryIntervalInSeconds": 30,
+        "SecureInput": false,
+        "SecureOutput": false
+      },
+      "AdditionalProperties": {
+        "typeProperties": {
+          "dataflow": {
+            "referenceName": "df_transform_hospital_admissions",
+            "type": "DataFlowReference",
+            "parameters": {},
+            "datasetParameters": {
+              "HospitalAdmissionSource": {},
+              "CountrySource": {},
+              "DimDateSource": {},
+              "WeeklySink": {},
+              "DailySink": {}
+            }
+          },
+          "staging": {},
+          "compute": {
+            "coreCount": 8,
+            "computeType": "General"
+          },
+          "traceLevel": "Fine"
+        }
+      },
+      "Name": "df_transform_hospital_admissions",
+      "Description": null,
+      "State": null,
+      "OnInactiveMarkAs": null,
+      "DependsOn": [],
+      "UserProperties": []
+    }
+  ],
+  "Parameters": null,
+  "Id": "/subscriptions/f84a2822-7f27-4f44-982c-ca7ca3705fdd/resourceGroups/covid-reporting-rg/providers/Microsoft.DataFactory/factories/covid-reporting-an-datafactory/pipelines/pl_process_hospital_admissions_data",
+  "ETag": "8b018bf1-0000-1100-0000-661c6b9c0000",
+  "ResourceGroupName": "covid-reporting-rg",
+  "DataFactoryName": "covid-reporting-an-datafactory"
+}

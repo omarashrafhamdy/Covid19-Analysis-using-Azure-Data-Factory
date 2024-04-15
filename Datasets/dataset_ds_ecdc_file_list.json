@@ -1,0 +1,49 @@
+{
+  "Name": "ds_ecdc_file_list",
+  "Structure": null,
+  "Properties": {
+    "Location": {
+      "Container": "configs",
+      "AdditionalProperties": {},
+      "FolderPath": null,
+      "FileName": "ecdc-file-list.json"
+    },
+    "EncodingName": null,
+    "Compression": null,
+    "AdditionalProperties": {
+      "typeProperties": {
+        "location": {
+          "type": "AzureBlobStorageLocation",
+          "fileName": "ecdc-file-list.json",
+          "container": "configs"
+        }
+      }
+    },
+    "Description": null,
+    "Structure": null,
+    "Schema": {
+      "type": "object",
+      "properties": {
+        "sourceRelativeURL": {
+          "type": "string"
+        },
+        "sinkFileName": {
+          "type": "string"
+        }
+      }
+    },
+    "LinkedServiceName": {
+      "ReferenceName": "ls_ablob_covidreportingsa",
+      "Parameters": null
+    },
+    "Parameters": null,
+    "Annotations": [],
+    "Folder": {
+      "Name": "lookup"
+    }
+  },
+  "Id": "/subscriptions/f84a2822-7f27-4f44-982c-ca7ca3705fdd/resourceGroups/covid-reporting-rg/providers/Microsoft.DataFactory/factories/covid-reporting-an-datafactory/datasets/ds_ecdc_file_list",
+  "ETag": "8b019af1-0000-1100-0000-661c6b9c0000",
+  "ResourceGroupName": "covid-reporting-rg",
+  "DataFactoryName": "covid-reporting-an-datafactory"
+}

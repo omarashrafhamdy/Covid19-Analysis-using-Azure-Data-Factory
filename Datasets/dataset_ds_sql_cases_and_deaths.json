@@ -1,0 +1,67 @@
+{
+  "Name": "ds_sql_cases_and_deaths",
+  "Structure": null,
+  "Properties": {
+    "TableName": null,
+    "TypePropertiesSchema": "covid_reporting",
+    "Table": "cases_and_deaths",
+    "AdditionalProperties": {
+      "typeProperties": {
+        "schema": "covid_reporting",
+        "table": "cases_and_deaths"
+      }
+    },
+    "Description": null,
+    "Structure": null,
+    "Schema": [
+      {
+        "name": "country",
+        "type": "varchar"
+      },
+      {
+        "name": "country_code_2_digit",
+        "type": "varchar"
+      },
+      {
+        "name": "country_code_3_digit",
+        "type": "varchar"
+      },
+      {
+        "name": "population",
+        "type": "bigint",
+        "precision": 19
+      },
+      {
+        "name": "cases_count",
+        "type": "bigint",
+        "precision": 19
+      },
+      {
+        "name": "deaths_count",
+        "type": "bigint",
+        "precision": 19
+      },
+      {
+        "name": "reported_date",
+        "type": "date"
+      },
+      {
+        "name": "source",
+        "type": "varchar"
+      }
+    ],
+    "LinkedServiceName": {
+      "ReferenceName": "ls_sql_covid_db",
+      "Parameters": null
+    },
+    "Parameters": null,
+    "Annotations": [],
+    "Folder": {
+      "Name": "sql"
+    }
+  },
+  "Id": "/subscriptions/f84a2822-7f27-4f44-982c-ca7ca3705fdd/resourceGroups/covid-reporting-rg/providers/Microsoft.DataFactory/factories/covid-reporting-an-datafactory/datasets/ds_sql_cases_and_deaths",
+  "ETag": "8b018ef1-0000-1100-0000-661c6b9c0000",
+  "ResourceGroupName": "covid-reporting-rg",
+  "DataFactoryName": "covid-reporting-an-datafactory"
+}

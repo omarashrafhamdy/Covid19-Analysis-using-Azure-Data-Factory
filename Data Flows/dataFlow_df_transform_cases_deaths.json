@@ -1,0 +1,164 @@
+{
+  "Name": "df_transform_cases_deaths",
+  "RGName": "covid-reporting-rg",
+  "DFName": "covid-reporting-an-datafactory",
+  "Properties": {
+    "Sources": [
+      {
+        "SchemaLinkedService": null,
+        "Name": "CasesAndDeathsSource",
+        "Description": null,
+        "Dataset": {
+          "ReferenceName": "ds_raw_cases_and_deaths",
+          "Parameters": null
+        },
+        "LinkedService": null,
+        "Flowlet": null
+      },
+      {
+        "SchemaLinkedService": null,
+        "Name": "CountryLookup",
+        "Description": null,
+        "Dataset": {
+          "ReferenceName": "ds_country_lookup",
+          "Parameters": null
+        },
+        "LinkedService": null,
+        "Flowlet": null
+      }
+    ],
+    "Sinks": [
+      {
+        "SchemaLinkedService": null,
+        "RejectedDataLinkedService": null,
+        "Name": "CaseAndDeathsSink",
+        "Description": null,
+        "Dataset": {
+          "ReferenceName": "ds_processed_cases_and_deaths",
+          "Parameters": null
+        },
+        "LinkedService": null,
+        "Flowlet": null
+      }
+    ],
+    "Transformations": [
+      {
+        "Name": "FilterEuropeOnly",
+        "Description": null,
+        "Dataset": null,
+        "LinkedService": null,
+        "Flowlet": null
+      },
+      {
+        "Name": "SelectOnlyRequiredField",
+        "Description": null,
+        "Dataset": null,
+        "LinkedService": null,
+        "Flowlet": null
+      },
+      {
+        "Name": "PivotCounts",
+        "Description": null,
+        "Dataset": null,
+        "LinkedService": null,
+        "Flowlet": null
+      },
+      {
+        "Name": "LookupCountry",
+        "Description": null,
+        "Dataset": null,
+        "LinkedService": null,
+        "Flowlet": null
+      },
+      {
+        "Name": "SelectForSink",
+        "Description": null,
+        "Dataset": null,
+        "LinkedService": null,
+        "Flowlet": null
+      }
+    ],
+    "Script": null,
+    "ScriptLines": [
+      "source(output(",
+      "          country as string,",
+      "          country_code as string,",
+      "          continent as string,",
+      "          population as integer,",
+      "          indicator as string,",
+      "          daily_count as integer,",
+      "          date as date,",
+      "          rate_14_day as double,",
+      "          source as string",
+      "     ),",
+      "     allowSchemaDrift: true,",
+      "     validateSchema: false,",
+      "     ignoreNoFilesFound: false) ~> CasesAndDeathsSource",
+      "source(output(",
+      "          country as string,",
+      "          country_code_2_digit as string,",
+      "          country_code_3_digit as string,",
+      "          continent as string,",
+      "          population as integer",
+      "     ),",
+      "     allowSchemaDrift: true,",
+      "     validateSchema: false,",
+      "     ignoreNoFilesFound: false) ~> CountryLookup",
+      "CasesAndDeathsSource filter(continent == 'Europe' && not(isNull(country_code))) ~> FilterEuropeOnly",
+      "FilterEuropeOnly select(mapColumn(",
+      "          country,",
+      "          country_code,",
+      "          population,",
+      "          indicator,",
+      "          daily_count,",
+      "          source,",
+      "          each(match(name == 'date'),",
+      "               'reported' + '_date' = $$)",
+      "     ),",
+      "     skipDuplicateMapInputs: false,",
+      "     skipDuplicateMapOutputs: false) ~> SelectOnlyRequiredField",
+      "SelectOnlyRequiredField pivot(groupBy(country,",
+      "          country_code,",
+      "          population,",
+      "          source,",
+      "          reported_date),",
+      "     pivotBy(indicator, ['confirmed cases', 'deaths']),",
+      "     count = sum(daily_count),",
+      "     columnNaming: '$V_$N',",
+      "     lateral: true) ~> PivotCounts",
+      "PivotCounts, CountryLookup lookup(PivotCounts@country == CountryLookup@country,",
+      "     multiple: false,",
+      "     pickup: 'any',",
+      "     broadcast: 'auto')~> LookupCountry",
+      "LookupCountry select(mapColumn(",
+      "          country = PivotCounts@country,",
+      "          country_code_2_digit,",
+      "          country_code_3_digit,",
+      "          population = PivotCounts@population,",
+      "          cases_count = {confirmed cases_count},",
+      "          deaths_count,",
+      "          reported_date,",
+      "          source",
+      "     ),",
+      "     skipDuplicateMapInputs: true,",
+      "     skipDuplicateMapOutputs: true) ~> SelectForSink",
+      "SelectForSink sink(allowSchemaDrift: true,",
+      "     validateSchema: false,",
+      "     partitionFileNames:['cases_and_deaths.csv'],",
+      "     truncate: true,",
+      "     umask: 0022,",
+      "     preCommands: [],",
+      "     postCommands: [],",
+      "     skipDuplicateMapInputs: true,",
+      "     skipDuplicateMapOutputs: true,",
+      "     partitionBy('hash', 1)) ~> CaseAndDeathsSink"
+    ],
+    "Description": null,
+    "Annotations": null,
+    "Folder": null
+  },
+  "Id": "/subscriptions/f84a2822-7f27-4f44-982c-ca7ca3705fdd/resourceGroups/covid-reporting-rg/providers/Microsoft.DataFactory/factories/covid-reporting-an-datafactory/dataflows/df_transform_cases_deaths",
+  "ETag": "8701dd83-0000-1100-0000-661c23eb0000",
+  "ResourceGroupName": "covid-reporting-rg",
+  "DataFactoryName": "covid-reporting-an-datafactory"
+}

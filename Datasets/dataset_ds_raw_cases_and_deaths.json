@@ -1,0 +1,88 @@
+{
+  "Name": "ds_raw_cases_and_deaths",
+  "Structure": null,
+  "Properties": {
+    "Location": {
+      "FileSystem": "raw",
+      "AdditionalProperties": {},
+      "FolderPath": "ecdc/cases_deaths",
+      "FileName": "cases_deaths.csv"
+    },
+    "ColumnDelimiter": ",",
+    "RowDelimiter": null,
+    "EncodingName": null,
+    "CompressionCodec": null,
+    "CompressionLevel": null,
+    "QuoteChar": "\"",
+    "EscapeChar": "\\",
+    "FirstRowAsHeader": true,
+    "NullValue": null,
+    "AdditionalProperties": {
+      "typeProperties": {
+        "location": {
+          "type": "AzureBlobFSLocation",
+          "fileName": "cases_deaths.csv",
+          "folderPath": "ecdc/cases_deaths",
+          "fileSystem": "raw"
+        },
+        "columnDelimiter": ",",
+        "escapeChar": "\\",
+        "firstRowAsHeader": true,
+        "quoteChar": "\""
+      }
+    },
+    "Description": null,
+    "Structure": null,
+    "Schema": [
+      {
+        "name": "country",
+        "type": "String"
+      },
+      {
+        "name": "country_code",
+        "type": "String"
+      },
+      {
+        "name": "continent",
+        "type": "String"
+      },
+      {
+        "name": "population",
+        "type": "String"
+      },
+      {
+        "name": "indicator",
+        "type": "String"
+      },
+      {
+        "name": "daily_count",
+        "type": "String"
+      },
+      {
+        "name": "date",
+        "type": "String"
+      },
+      {
+        "name": "rate_14_day",
+        "type": "String"
+      },
+      {
+        "name": "source",
+        "type": "String"
+      }
+    ],
+    "LinkedServiceName": {
+      "ReferenceName": "ls_adls_covidreportingdl",
+      "Parameters": null
+    },
+    "Parameters": null,
+    "Annotations": [],
+    "Folder": {
+      "Name": "raw"
+    }
+  },
+  "Id": "/subscriptions/f84a2822-7f27-4f44-982c-ca7ca3705fdd/resourceGroups/covid-reporting-rg/providers/Microsoft.DataFactory/factories/covid-reporting-an-datafactory/datasets/ds_raw_cases_and_deaths",
+  "ETag": "8b019cf1-0000-1100-0000-661c6b9c0000",
+  "ResourceGroupName": "covid-reporting-rg",
+  "DataFactoryName": "covid-reporting-an-datafactory"
+}

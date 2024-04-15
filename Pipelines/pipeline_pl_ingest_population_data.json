@@ -1,0 +1,434 @@
+{
+  "Name": "pl_ingest_population_data",
+  "Activities": [
+    {
+      "Timeout": "0.00:02:00",
+      "Sleep": 10,
+      "MinimumSize": 1024,
+      "ChildItems": null,
+      "Dataset": {
+        "ReferenceName": "ds_population_raw_gz",
+        "Parameters": {}
+      },
+      "AdditionalProperties": {
+        "typeProperties": {
+          "dataset": {
+            "referenceName": "ds_population_raw_gz",
+            "type": "DatasetReference",
+            "parameters": {}
+          },
+          "timeout": "0.00:02:00",
+          "sleep": 10,
+          "minimumSize": 1024
+        }
+      },
+      "Name": "Check if file exists",
+      "Description": null,
+      "State": null,
+      "OnInactiveMarkAs": null,
+      "DependsOn": [],
+      "UserProperties": []
+    },
+    {
+      "Dataset": {
+        "ReferenceName": "ds_population_raw_gz",
+        "Parameters": {}
+      },
+      "FieldList": [
+        "columnCount",
+        "size",
+        "exists"
+      ],
+      "StoreSettings": {
+        "Recursive": null,
+        "WildcardFolderPath": null,
+        "WildcardFileName": null,
+        "Prefix": null,
+        "FileListPath": null,
+        "EnablePartitionDiscovery": false,
+        "PartitionRootPath": null,
+        "DeleteFilesAfterCompletion": null,
+        "ModifiedDatetimeStart": null,
+        "ModifiedDatetimeEnd": null,
+        "AdditionalProperties": {},
+        "MaxConcurrentConnections": null,
+        "DisableMetricsCollection": null
+      },
+      "FormatSettings": {
+        "SkipLineCount": null,
+        "CompressionProperties": null,
+        "AdditionalProperties": {}
+      },
+      "LinkedServiceName": null,
+      "Policy": {
+        "AdditionalProperties": null,
+        "Timeout": "0.12:00:00",
+        "Retry": 0,
+        "RetryIntervalInSeconds": 30,
+        "SecureInput": false,
+        "SecureOutput": false
+      },
+      "AdditionalProperties": {
+        "typeProperties": {
+          "dataset": {
+            "referenceName": "ds_population_raw_gz",
+            "type": "DatasetReference",
+            "parameters": {}
+          },
+          "fieldList": [
+            "columnCount",
+            "size",
+            "exists"
+          ],
+          "storeSettings": {
+            "type": "AzureBlobStorageReadSettings",
+            "enablePartitionDiscovery": false
+          },
+          "formatSettings": {
+            "type": "DelimitedTextReadSettings"
+          }
+        }
+      },
+      "Name": "Get File Metadata",
+      "Description": null,
+      "State": null,
+      "OnInactiveMarkAs": null,
+      "DependsOn": [
+        {
+          "AdditionalProperties": null,
+          "Activity": "Check if file exists",
+          "DependencyConditions": [
+            "Succeeded"
+          ]
+        }
+      ],
+      "UserProperties": []
+    },
+    {
+      "Expression": {
+        "Value": "@equals(activity('Get File Metadata').output.columnCount,13)"
+      },
+      "IfTrueActivities": [
+        {
+          "Inputs": [
+            {
+              "ReferenceName": "ds_population_raw_gz",
+              "Parameters": {}
+            }
+          ],
+          "Outputs": [
+            {
+              "ReferenceName": "ds_population_raw_tsv",
+              "Parameters": {}
+            }
+          ],
+          "StagingSettings": null,
+          "LogSettings": null,
+          "Source": {
+            "StoreSettings": {
+              "Recursive": true,
+              "WildcardFolderPath": null,
+              "WildcardFileName": null,
+              "Prefix": null,
+              "FileListPath": null,
+              "EnablePartitionDiscovery": false,
+              "PartitionRootPath": null,
+              "DeleteFilesAfterCompletion": null,
+              "ModifiedDatetimeStart": null,
+              "ModifiedDatetimeEnd": null,
+              "AdditionalProperties": {},
+              "MaxConcurrentConnections": null,
+              "DisableMetricsCollection": null
+            },
+            "FormatSettings": {
+              "SkipLineCount": null,
+              "CompressionProperties": null,
+              "AdditionalProperties": {}
+            },
+            "AdditionalColumns": null,
+            "SourceRetryCount": null,
+            "SourceRetryWait": null,
+            "MaxConcurrentConnections": null,
+            "DisableMetricsCollection": null
+          },
+          "Sink": {
+            "StoreSettings": {
+              "BlockSizeInMb": null,
+              "MaxConcurrentConnections": null,
+              "DisableMetricsCollection": null,
+              "CopyBehavior": null,
+              "Metadata": null
+            },
+            "FormatSettings": {
+              "QuoteAllText": true,
+              "FileExtension": ".txt",
+              "MaxRowsPerFile": null,
+              "FileNamePrefix": null,
+              "AdditionalProperties": {}
+            },
+            "WriteBatchSize": null,
+            "WriteBatchTimeout": null,
+            "SinkRetryCount": null,
+            "SinkRetryWait": null,
+            "MaxConcurrentConnections": null,
+            "DisableMetricsCollection": null
+          },
+          "Translator": {
+            "type": "TabularTranslator",
+            "typeConversion": true,
+            "typeConversionSettings": {
+              "allowDataTruncation": true,
+              "treatBooleanAsNumber": false
+            }
+          },
+          "EnableStaging": false,
+          "ParallelCopies": null,
+          "DataIntegrationUnits": null,
+          "EnableSkipIncompatibleRow": null,
+          "RedirectIncompatibleRowSettings": null,
+          "LogStorageSettings": null,
+          "PreserveRules": null,
+          "Preserve": null,
+          "ValidateDataConsistency": null,
+          "SkipErrorFile": null,
+          "LinkedServiceName": null,
+          "Policy": {
+            "AdditionalProperties": null,
+            "Timeout": "0.00:10:00",
+            "Retry": 0,
+            "RetryIntervalInSeconds": 30,
+            "SecureInput": false,
+            "SecureOutput": false
+          },
+          "AdditionalProperties": {
+            "typeProperties": {
+              "source": {
+                "type": "DelimitedTextSource",
+                "storeSettings": {
+                  "type": "AzureBlobStorageReadSettings",
+                  "recursive": true,
+                  "enablePartitionDiscovery": false
+                },
+                "formatSettings": {
+                  "type": "DelimitedTextReadSettings"
+                }
+              },
+              "sink": {
+                "type": "DelimitedTextSink",
+                "storeSettings": {
+                  "type": "AzureBlobFSWriteSettings"
+                },
+                "formatSettings": {
+                  "type": "DelimitedTextWriteSettings",
+                  "quoteAllText": true,
+                  "fileExtension": ".txt"
+                }
+              },
+              "enableStaging": false,
+              "translator": {
+                "type": "TabularTranslator",
+                "typeConversion": true,
+                "typeConversionSettings": {
+                  "allowDataTruncation": true,
+                  "treatBooleanAsNumber": false
+                }
+              }
+            }
+          },
+          "Name": "Copy Population Data",
+          "Description": null,
+          "State": null,
+          "OnInactiveMarkAs": null,
+          "DependsOn": [],
+          "UserProperties": []
+        },
+        {
+          "Recursive": null,
+          "MaxConcurrentConnections": null,
+          "EnableLogging": false,
+          "LogStorageSettings": null,
+          "Dataset": {
+            "ReferenceName": "ds_population_raw_gz",
+            "Parameters": {}
+          },
+          "StoreSettings": {
+            "Recursive": true,
+            "WildcardFolderPath": null,
+            "WildcardFileName": null,
+            "Prefix": null,
+            "FileListPath": null,
+            "EnablePartitionDiscovery": false,
+            "PartitionRootPath": null,
+            "DeleteFilesAfterCompletion": null,
+            "ModifiedDatetimeStart": null,
+            "ModifiedDatetimeEnd": null,
+            "AdditionalProperties": {},
+            "MaxConcurrentConnections": null,
+            "DisableMetricsCollection": null
+          },
+          "LinkedServiceName": null,
+          "Policy": {
+            "AdditionalProperties": null,
+            "Timeout": "0.12:00:00",
+            "Retry": 0,
+            "RetryIntervalInSeconds": 30,
+            "SecureInput": false,
+            "SecureOutput": false
+          },
+          "AdditionalProperties": {
+            "typeProperties": {
+              "dataset": {
+                "referenceName": "ds_population_raw_gz",
+                "type": "DatasetReference",
+                "parameters": {}
+              },
+              "enableLogging": false,
+              "storeSettings": {
+                "type": "AzureBlobStorageReadSettings",
+                "recursive": true,
+                "enablePartitionDiscovery": false
+              }
+            }
+          },
+          "Name": "Delete Source Files",
+          "Description": null,
+          "State": null,
+          "OnInactiveMarkAs": null,
+          "DependsOn": [
+            {
+              "AdditionalProperties": null,
+              "Activity": "Copy Population Data",
+              "DependencyConditions": [
+                "Succeeded"
+              ]
+            }
+          ],
+          "UserProperties": []
+        }
+      ],
+      "IfFalseActivities": null,
+      "AdditionalProperties": {
+        "typeProperties": {
+          "expression": {
+            "value": "@equals(activity('Get File Metadata').output.columnCount,13)",
+            "type": "Expression"
+          },
+          "ifTrueActivities": [
+            {
+              "name": "Copy Population Data",
+              "type": "Copy",
+              "dependsOn": [],
+              "policy": {
+                "timeout": "0.00:10:00",
+                "retry": 0,
+                "retryIntervalInSeconds": 30,
+                "secureOutput": false,
+                "secureInput": false
+              },
+              "userProperties": [],
+              "typeProperties": {
+                "source": {
+                  "type": "DelimitedTextSource",
+                  "storeSettings": {
+                    "type": "AzureBlobStorageReadSettings",
+                    "recursive": true,
+                    "enablePartitionDiscovery": false
+                  },
+                  "formatSettings": {
+                    "type": "DelimitedTextReadSettings"
+                  }
+                },
+                "sink": {
+                  "type": "DelimitedTextSink",
+                  "storeSettings": {
+                    "type": "AzureBlobFSWriteSettings"
+                  },
+                  "formatSettings": {
+                    "type": "DelimitedTextWriteSettings",
+                    "quoteAllText": true,
+                    "fileExtension": ".txt"
+                  }
+                },
+                "enableStaging": false,
+                "translator": {
+                  "type": "TabularTranslator",
+                  "typeConversion": true,
+                  "typeConversionSettings": {
+                    "allowDataTruncation": true,
+                    "treatBooleanAsNumber": false
+                  }
+                }
+              },
+              "inputs": [
+                {
+                  "referenceName": "ds_population_raw_gz",
+                  "type": "DatasetReference",
+                  "parameters": {}
+                }
+              ],
+              "outputs": [
+                {
+                  "referenceName": "ds_population_raw_tsv",
+                  "type": "DatasetReference",
+                  "parameters": {}
+                }
+              ]
+            },
+            {
+              "name": "Delete Source Files",
+              "type": "Delete",
+              "dependsOn": [
+                {
+                  "activity": "Copy Population Data",
+                  "dependencyConditions": [
+                    "Succeeded"
+                  ]
+                }
+              ],
+              "policy": {
+                "timeout": "0.12:00:00",
+                "retry": 0,
+                "retryIntervalInSeconds": 30,
+                "secureOutput": false,
+                "secureInput": false
+              },
+              "userProperties": [],
+              "typeProperties": {
+                "dataset": {
+                  "referenceName": "ds_population_raw_gz",
+                  "type": "DatasetReference",
+                  "parameters": {}
+                },
+                "enableLogging": false,
+                "storeSettings": {
+                  "type": "AzureBlobStorageReadSettings",
+                  "recursive": true,
+                  "enablePartitionDiscovery": false
+                }
+              }
+            }
+          ]
+        }
+      },
+      "Name": "If Column count matches",
+      "Description": null,
+      "State": null,
+      "OnInactiveMarkAs": null,
+      "DependsOn": [
+        {
+          "AdditionalProperties": null,
+          "Activity": "Get File Metadata",
+          "DependencyConditions": [
+            "Succeeded"
+          ]
+        }
+      ],
+      "UserProperties": []
+    }
+  ],
+  "Parameters": null,
+  "Id": "/subscriptions/f84a2822-7f27-4f44-982c-ca7ca3705fdd/resourceGroups/covid-reporting-rg/providers/Microsoft.DataFactory/factories/covid-reporting-an-datafactory/pipelines/pl_ingest_population_data",
+  "ETag": "8c019b16-0000-1100-0000-661c6dc60000",
+  "ResourceGroupName": "covid-reporting-rg",
+  "DataFactoryName": "covid-reporting-an-datafactory"
+}

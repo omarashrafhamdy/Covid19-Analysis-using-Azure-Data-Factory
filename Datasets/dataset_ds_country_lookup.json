@@ -1,0 +1,72 @@
+{
+  "Name": "ds_country_lookup",
+  "Structure": null,
+  "Properties": {
+    "Location": {
+      "FileSystem": "lookup",
+      "AdditionalProperties": {},
+      "FolderPath": "dim_country",
+      "FileName": "country-lookup.csv"
+    },
+    "ColumnDelimiter": ",",
+    "RowDelimiter": null,
+    "EncodingName": null,
+    "CompressionCodec": null,
+    "CompressionLevel": null,
+    "QuoteChar": "\"",
+    "EscapeChar": "\\",
+    "FirstRowAsHeader": true,
+    "NullValue": null,
+    "AdditionalProperties": {
+      "typeProperties": {
+        "location": {
+          "type": "AzureBlobFSLocation",
+          "fileName": "country-lookup.csv",
+          "folderPath": "dim_country",
+          "fileSystem": "lookup"
+        },
+        "columnDelimiter": ",",
+        "escapeChar": "\\",
+        "firstRowAsHeader": true,
+        "quoteChar": "\""
+      }
+    },
+    "Description": null,
+    "Structure": null,
+    "Schema": [
+      {
+        "name": "country",
+        "type": "String"
+      },
+      {
+        "name": "country_code_2_digit",
+        "type": "String"
+      },
+      {
+        "name": "country_code_3_digit",
+        "type": "String"
+      },
+      {
+        "name": "continent",
+        "type": "String"
+      },
+      {
+        "name": "population",
+        "type": "String"
+      }
+    ],
+    "LinkedServiceName": {
+      "ReferenceName": "ls_adls_covidreportingdl",
+      "Parameters": null
+    },
+    "Parameters": null,
+    "Annotations": [],
+    "Folder": {
+      "Name": "lookup"
+    }
+  },
+  "Id": "/subscriptions/f84a2822-7f27-4f44-982c-ca7ca3705fdd/resourceGroups/covid-reporting-rg/providers/Microsoft.DataFactory/factories/covid-reporting-an-datafactory/datasets/ds_country_lookup",
+  "ETag": "8b019bf1-0000-1100-0000-661c6b9c0000",
+  "ResourceGroupName": "covid-reporting-rg",
+  "DataFactoryName": "covid-reporting-an-datafactory"
+}

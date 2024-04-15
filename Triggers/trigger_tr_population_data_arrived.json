@@ -1,0 +1,39 @@
+{
+  "Name": "tr_population_data_arrived",
+  "RuntimeState": "Stopped",
+  "Properties": {
+    "BlobPathBeginsWith": "/population/blobs/population_by_age.tsv.gz",
+    "BlobPathEndsWith": null,
+    "IgnoreEmptyBlobs": true,
+    "Events": [
+      "Microsoft.Storage.BlobCreated"
+    ],
+    "Scope": "/subscriptions/f84a2822-7f27-4f44-982c-ca7ca3705fdd/resourceGroups/covid-reporting-rg/providers/Microsoft.Storage/storageAccounts/covidreportingsa20",
+    "Pipelines": [
+      {
+        "PipelineReference": {
+          "ReferenceName": "pl_execute_population_pipelines",
+          "Name": null
+        },
+        "Parameters": {}
+      }
+    ],
+    "AdditionalProperties": {
+      "typeProperties": {
+        "blobPathBeginsWith": "/population/blobs/population_by_age.tsv.gz",
+        "ignoreEmptyBlobs": true,
+        "scope": "/subscriptions/f84a2822-7f27-4f44-982c-ca7ca3705fdd/resourceGroups/covid-reporting-rg/providers/Microsoft.Storage/storageAccounts/covidreportingsa20",
+        "events": [
+          "Microsoft.Storage.BlobCreated"
+        ]
+      }
+    },
+    "Description": null,
+    "RuntimeState": "Stopped",
+    "Annotations": []
+  },
+  "Id": "/subscriptions/f84a2822-7f27-4f44-982c-ca7ca3705fdd/resourceGroups/covid-reporting-rg/providers/Microsoft.DataFactory/factories/covid-reporting-an-datafactory/triggers/tr_population_data_arrived",
+  "ETag": "8c013508-0000-1100-0000-661c6d010000",
+  "ResourceGroupName": "covid-reporting-rg",
+  "DataFactoryName": "covid-reporting-an-datafactory"
+}

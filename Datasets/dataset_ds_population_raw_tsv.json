@@ -1,0 +1,51 @@
+{
+  "Name": "ds_population_raw_tsv",
+  "Structure": null,
+  "Properties": {
+    "Location": {
+      "FileSystem": "raw",
+      "AdditionalProperties": {},
+      "FolderPath": "population",
+      "FileName": "population_by_age_tsv"
+    },
+    "ColumnDelimiter": "\t",
+    "RowDelimiter": null,
+    "EncodingName": null,
+    "CompressionCodec": null,
+    "CompressionLevel": null,
+    "QuoteChar": "\"",
+    "EscapeChar": "\\",
+    "FirstRowAsHeader": true,
+    "NullValue": null,
+    "AdditionalProperties": {
+      "typeProperties": {
+        "location": {
+          "type": "AzureBlobFSLocation",
+          "fileName": "population_by_age_tsv",
+          "folderPath": "population",
+          "fileSystem": "raw"
+        },
+        "columnDelimiter": "\t",
+        "escapeChar": "\\",
+        "firstRowAsHeader": true,
+        "quoteChar": "\""
+      }
+    },
+    "Description": null,
+    "Structure": null,
+    "Schema": [],
+    "LinkedServiceName": {
+      "ReferenceName": "ls_adls_covidreportingdl",
+      "Parameters": null
+    },
+    "Parameters": null,
+    "Annotations": [],
+    "Folder": {
+      "Name": "raw"
+    }
+  },
+  "Id": "/subscriptions/f84a2822-7f27-4f44-982c-ca7ca3705fdd/resourceGroups/covid-reporting-rg/providers/Microsoft.DataFactory/factories/covid-reporting-an-datafactory/datasets/ds_population_raw_tsv",
+  "ETag": "8b0191f1-0000-1100-0000-661c6b9c0000",
+  "ResourceGroupName": "covid-reporting-rg",
+  "DataFactoryName": "covid-reporting-an-datafactory"
+}

@@ -1,0 +1,70 @@
+{
+  "Name": "pl_process_cases_deaths_data",
+  "Activities": [
+    {
+      "DataFlow": {
+        "AdditionalProperties": null,
+        "ReferenceName": "df_transform_cases_deaths",
+        "DatasetParameters": {
+          "CasesAndDeathsSource": {},
+          "CountryLookup": {},
+          "CaseAndDeathsSink": {}
+        },
+        "Parameters": {}
+      },
+      "Staging": {
+        "LinkedService": null,
+        "FolderPath": null
+      },
+      "IntegrationRuntime": null,
+      "Compute": {
+        "ComputeType": "General",
+        "CoreCount": 8
+      },
+      "TraceLevel": "Fine",
+      "ContinueOnError": null,
+      "RunConcurrently": null,
+      "SourceStagingConcurrency": null,
+      "LinkedServiceName": null,
+      "Policy": {
+        "AdditionalProperties": null,
+        "Timeout": "0.12:00:00",
+        "Retry": 0,
+        "RetryIntervalInSeconds": 30,
+        "SecureInput": false,
+        "SecureOutput": false
+      },
+      "AdditionalProperties": {
+        "typeProperties": {
+          "dataflow": {
+            "referenceName": "df_transform_cases_deaths",
+            "type": "DataFlowReference",
+            "parameters": {},
+            "datasetParameters": {
+              "CasesAndDeathsSource": {},
+              "CountryLookup": {},
+              "CaseAndDeathsSink": {}
+            }
+          },
+          "staging": {},
+          "compute": {
+            "coreCount": 8,
+            "computeType": "General"
+          },
+          "traceLevel": "Fine"
+        }
+      },
+      "Name": "df_transform_cases_deaths",
+      "Description": null,
+      "State": null,
+      "OnInactiveMarkAs": null,
+      "DependsOn": [],
+      "UserProperties": []
+    }
+  ],
+  "Parameters": null,
+  "Id": "/subscriptions/f84a2822-7f27-4f44-982c-ca7ca3705fdd/resourceGroups/covid-reporting-rg/providers/Microsoft.DataFactory/factories/covid-reporting-an-datafactory/pipelines/pl_process_cases_deaths_data",
+  "ETag": "8b0195f1-0000-1100-0000-661c6b9c0000",
+  "ResourceGroupName": "covid-reporting-rg",
+  "DataFactoryName": "covid-reporting-an-datafactory"
+}

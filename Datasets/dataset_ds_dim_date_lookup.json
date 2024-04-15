@@ -1,0 +1,100 @@
+{
+  "Name": "ds_dim_date_lookup",
+  "Structure": null,
+  "Properties": {
+    "Location": {
+      "FileSystem": "lookup",
+      "AdditionalProperties": {},
+      "FolderPath": "dim_date",
+      "FileName": "dim-date.csv"
+    },
+    "ColumnDelimiter": ",",
+    "RowDelimiter": null,
+    "EncodingName": null,
+    "CompressionCodec": null,
+    "CompressionLevel": null,
+    "QuoteChar": "\"",
+    "EscapeChar": "\\",
+    "FirstRowAsHeader": true,
+    "NullValue": null,
+    "AdditionalProperties": {
+      "typeProperties": {
+        "location": {
+          "type": "AzureBlobFSLocation",
+          "fileName": "dim-date.csv",
+          "folderPath": "dim_date",
+          "fileSystem": "lookup"
+        },
+        "columnDelimiter": ",",
+        "escapeChar": "\\",
+        "firstRowAsHeader": true,
+        "quoteChar": "\""
+      }
+    },
+    "Description": null,
+    "Structure": null,
+    "Schema": [
+      {
+        "name": "date_key",
+        "type": "String"
+      },
+      {
+        "name": "date",
+        "type": "String"
+      },
+      {
+        "name": "year",
+        "type": "String"
+      },
+      {
+        "name": "month",
+        "type": "String"
+      },
+      {
+        "name": "day",
+        "type": "String"
+      },
+      {
+        "name": "day_name",
+        "type": "String"
+      },
+      {
+        "name": "day_of_year",
+        "type": "String"
+      },
+      {
+        "name": "week_of_month",
+        "type": "String"
+      },
+      {
+        "name": "week_of_year",
+        "type": "String"
+      },
+      {
+        "name": "month_name",
+        "type": "String"
+      },
+      {
+        "name": "year_month",
+        "type": "String"
+      },
+      {
+        "name": "year_week",
+        "type": "String"
+      }
+    ],
+    "LinkedServiceName": {
+      "ReferenceName": "ls_adls_covidreportingdl",
+      "Parameters": null
+    },
+    "Parameters": null,
+    "Annotations": [],
+    "Folder": {
+      "Name": "lookup"
+    }
+  },
+  "Id": "/subscriptions/f84a2822-7f27-4f44-982c-ca7ca3705fdd/resourceGroups/covid-reporting-rg/providers/Microsoft.DataFactory/factories/covid-reporting-an-datafactory/datasets/ds_dim_date_lookup",
+  "ETag": "8b01a0f1-0000-1100-0000-661c6b9c0000",
+  "ResourceGroupName": "covid-reporting-rg",
+  "DataFactoryName": "covid-reporting-an-datafactory"
+}

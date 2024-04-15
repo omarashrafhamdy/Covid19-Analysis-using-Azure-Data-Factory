@@ -1,0 +1,360 @@
+{
+  "Name": "pl_sqlize_testing",
+  "Activities": [
+    {
+      "Inputs": [
+        {
+          "ReferenceName": "ds_processed_testing",
+          "Parameters": {}
+        }
+      ],
+      "Outputs": [
+        {
+          "ReferenceName": "ds_sql_testing",
+          "Parameters": {}
+        }
+      ],
+      "StagingSettings": null,
+      "LogSettings": null,
+      "Source": {
+        "StoreSettings": {
+          "Recursive": true,
+          "WildcardFolderPath": null,
+          "WildcardFileName": "*",
+          "FileListPath": null,
+          "EnablePartitionDiscovery": false,
+          "PartitionRootPath": null,
+          "DeleteFilesAfterCompletion": null,
+          "ModifiedDatetimeStart": null,
+          "ModifiedDatetimeEnd": null,
+          "AdditionalProperties": {},
+          "MaxConcurrentConnections": null,
+          "DisableMetricsCollection": null
+        },
+        "FormatSettings": {
+          "SkipLineCount": null,
+          "CompressionProperties": null,
+          "AdditionalProperties": {}
+        },
+        "AdditionalColumns": null,
+        "SourceRetryCount": null,
+        "SourceRetryWait": null,
+        "MaxConcurrentConnections": null,
+        "DisableMetricsCollection": null
+      },
+      "Sink": {
+        "SqlWriterStoredProcedureName": null,
+        "SqlWriterTableType": null,
+        "PreCopyScript": "truncate table covid_reporting.testing;",
+        "StoredProcedureParameters": null,
+        "StoredProcedureTableTypeParameterName": null,
+        "TableOption": null,
+        "SqlWriterUseTableLock": false,
+        "WriteBehavior": "insert",
+        "UpsertSettings": null,
+        "WriteBatchSize": null,
+        "WriteBatchTimeout": null,
+        "SinkRetryCount": null,
+        "SinkRetryWait": null,
+        "MaxConcurrentConnections": null,
+        "DisableMetricsCollection": false
+      },
+      "Translator": {
+        "type": "TabularTranslator",
+        "mappings": [
+          {
+            "source": {
+              "type": "String",
+              "ordinal": 1
+            },
+            "sink": {
+              "name": "country",
+              "type": "String",
+              "physicalType": "varchar"
+            }
+          },
+          {
+            "source": {
+              "type": "String",
+              "ordinal": 2
+            },
+            "sink": {
+              "name": "country_code_2_digit",
+              "type": "String",
+              "physicalType": "varchar"
+            }
+          },
+          {
+            "source": {
+              "type": "String",
+              "ordinal": 3
+            },
+            "sink": {
+              "name": "country_code_3_digit",
+              "type": "String",
+              "physicalType": "varchar"
+            }
+          },
+          {
+            "source": {
+              "type": "String",
+              "ordinal": 4
+            },
+            "sink": {
+              "name": "year_week",
+              "type": "String",
+              "physicalType": "varchar"
+            }
+          },
+          {
+            "source": {
+              "type": "String",
+              "ordinal": 5
+            },
+            "sink": {
+              "name": "week_start_date",
+              "type": "DateTime",
+              "physicalType": "date"
+            }
+          },
+          {
+            "source": {
+              "type": "String",
+              "ordinal": 6
+            },
+            "sink": {
+              "name": "week_end_date",
+              "type": "DateTime",
+              "physicalType": "date"
+            }
+          },
+          {
+            "source": {
+              "type": "String",
+              "ordinal": 7
+            },
+            "sink": {
+              "name": "new_cases",
+              "type": "Int64",
+              "physicalType": "bigint"
+            }
+          },
+          {
+            "source": {
+              "type": "String",
+              "ordinal": 8
+            },
+            "sink": {
+              "name": "tests_done",
+              "type": "Int64",
+              "physicalType": "bigint"
+            }
+          },
+          {
+            "source": {
+              "type": "String",
+              "ordinal": 9
+            },
+            "sink": {
+              "name": "population",
+              "type": "Int64",
+              "physicalType": "bigint"
+            }
+          },
+          {
+            "source": {
+              "type": "String",
+              "physicalType": "String",
+              "ordinal": 12
+            },
+            "sink": {
+              "name": "testing_data_source",
+              "type": "String",
+              "physicalType": "varchar"
+            }
+          }
+        ],
+        "typeConversion": true,
+        "typeConversionSettings": {
+          "allowDataTruncation": true,
+          "treatBooleanAsNumber": false
+        }
+      },
+      "EnableStaging": false,
+      "ParallelCopies": null,
+      "DataIntegrationUnits": null,
+      "EnableSkipIncompatibleRow": null,
+      "RedirectIncompatibleRowSettings": null,
+      "LogStorageSettings": null,
+      "PreserveRules": null,
+      "Preserve": null,
+      "ValidateDataConsistency": null,
+      "SkipErrorFile": null,
+      "LinkedServiceName": null,
+      "Policy": {
+        "AdditionalProperties": null,
+        "Timeout": "0.12:00:00",
+        "Retry": 0,
+        "RetryIntervalInSeconds": 30,
+        "SecureInput": false,
+        "SecureOutput": false
+      },
+      "AdditionalProperties": {
+        "typeProperties": {
+          "source": {
+            "type": "DelimitedTextSource",
+            "storeSettings": {
+              "type": "AzureBlobFSReadSettings",
+              "recursive": true,
+              "wildcardFileName": "*",
+              "enablePartitionDiscovery": false
+            },
+            "formatSettings": {
+              "type": "DelimitedTextReadSettings"
+            }
+          },
+          "sink": {
+            "type": "AzureSqlSink",
+            "preCopyScript": "truncate table covid_reporting.testing;",
+            "writeBehavior": "insert",
+            "sqlWriterUseTableLock": false,
+            "disableMetricsCollection": false
+          },
+          "enableStaging": false,
+          "translator": {
+            "type": "TabularTranslator",
+            "mappings": [
+              {
+                "source": {
+                  "type": "String",
+                  "ordinal": 1
+                },
+                "sink": {
+                  "name": "country",
+                  "type": "String",
+                  "physicalType": "varchar"
+                }
+              },
+              {
+                "source": {
+                  "type": "String",
+                  "ordinal": 2
+                },
+                "sink": {
+                  "name": "country_code_2_digit",
+                  "type": "String",
+                  "physicalType": "varchar"
+                }
+              },
+              {
+                "source": {
+                  "type": "String",
+                  "ordinal": 3
+                },
+                "sink": {
+                  "name": "country_code_3_digit",
+                  "type": "String",
+                  "physicalType": "varchar"
+                }
+              },
+              {
+                "source": {
+                  "type": "String",
+                  "ordinal": 4
+                },
+                "sink": {
+                  "name": "year_week",
+                  "type": "String",
+                  "physicalType": "varchar"
+                }
+              },
+              {
+                "source": {
+                  "type": "String",
+                  "ordinal": 5
+                },
+                "sink": {
+                  "name": "week_start_date",
+                  "type": "DateTime",
+                  "physicalType": "date"
+                }
+              },
+              {
+                "source": {
+                  "type": "String",
+                  "ordinal": 6
+                },
+                "sink": {
+                  "name": "week_end_date",
+                  "type": "DateTime",
+                  "physicalType": "date"
+                }
+              },
+              {
+                "source": {
+                  "type": "String",
+                  "ordinal": 7
+                },
+                "sink": {
+                  "name": "new_cases",
+                  "type": "Int64",
+                  "physicalType": "bigint"
+                }
+              },
+              {
+                "source": {
+                  "type": "String",
+                  "ordinal": 8
+                },
+                "sink": {
+                  "name": "tests_done",
+                  "type": "Int64",
+                  "physicalType": "bigint"
+                }
+              },
+              {
+                "source": {
+                  "type": "String",
+                  "ordinal": 9
+                },
+                "sink": {
+                  "name": "population",
+                  "type": "Int64",
+                  "physicalType": "bigint"
+                }
+              },
+              {
+                "source": {
+                  "type": "String",
+                  "physicalType": "String",
+                  "ordinal": 12
+                },
+                "sink": {
+                  "name": "testing_data_source",
+                  "type": "String",
+                  "physicalType": "varchar"
+                }
+              }
+            ],
+            "typeConversion": true,
+            "typeConversionSettings": {
+              "allowDataTruncation": true,
+              "treatBooleanAsNumber": false
+            }
+          }
+        }
+      },
+      "Name": "Copy Testing",
+      "Description": null,
+      "State": null,
+      "OnInactiveMarkAs": null,
+      "DependsOn": [],
+      "UserProperties": []
+    }
+  ],
+  "Parameters": null,
+  "Id": "/subscriptions/f84a2822-7f27-4f44-982c-ca7ca3705fdd/resourceGroups/covid-reporting-rg/providers/Microsoft.DataFactory/factories/covid-reporting-an-datafactory/pipelines/pl_sqlize_testing",
+  "ETag": "8b01acf1-0000-1100-0000-661c6b9d0000",
+  "ResourceGroupName": "covid-reporting-rg",
+  "DataFactoryName": "covid-reporting-an-datafactory"
+}

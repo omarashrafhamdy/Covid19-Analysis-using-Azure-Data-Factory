@@ -1,0 +1,75 @@
+{
+  "Name": "ds_sql_testing",
+  "Structure": null,
+  "Properties": {
+    "TableName": null,
+    "TypePropertiesSchema": "covid_reporting",
+    "Table": "testing",
+    "AdditionalProperties": {
+      "typeProperties": {
+        "schema": "covid_reporting",
+        "table": "testing"
+      }
+    },
+    "Description": null,
+    "Structure": null,
+    "Schema": [
+      {
+        "name": "country",
+        "type": "varchar"
+      },
+      {
+        "name": "country_code_2_digit",
+        "type": "varchar"
+      },
+      {
+        "name": "country_code_3_digit",
+        "type": "varchar"
+      },
+      {
+        "name": "year_week",
+        "type": "varchar"
+      },
+      {
+        "name": "week_start_date",
+        "type": "date"
+      },
+      {
+        "name": "week_end_date",
+        "type": "date"
+      },
+      {
+        "name": "new_cases",
+        "type": "bigint",
+        "precision": 19
+      },
+      {
+        "name": "tests_done",
+        "type": "bigint",
+        "precision": 19
+      },
+      {
+        "name": "population",
+        "type": "bigint",
+        "precision": 19
+      },
+      {
+        "name": "testing_data_source",
+        "type": "varchar"
+      }
+    ],
+    "LinkedServiceName": {
+      "ReferenceName": "ls_sql_covid_db",
+      "Parameters": null
+    },
+    "Parameters": null,
+    "Annotations": [],
+    "Folder": {
+      "Name": "sql"
+    }
+  },
+  "Id": "/subscriptions/f84a2822-7f27-4f44-982c-ca7ca3705fdd/resourceGroups/covid-reporting-rg/providers/Microsoft.DataFactory/factories/covid-reporting-an-datafactory/datasets/ds_sql_testing",
+  "ETag": "8b0198f1-0000-1100-0000-661c6b9c0000",
+  "ResourceGroupName": "covid-reporting-rg",
+  "DataFactoryName": "covid-reporting-an-datafactory"
+}

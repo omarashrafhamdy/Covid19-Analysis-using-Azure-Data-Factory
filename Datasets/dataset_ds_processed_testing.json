@@ -1,0 +1,87 @@
+{
+  "Name": "ds_processed_testing",
+  "Structure": null,
+  "Properties": {
+    "Location": {
+      "FileSystem": "processed",
+      "AdditionalProperties": {},
+      "FolderPath": "ecdc/testing",
+      "FileName": null
+    },
+    "ColumnDelimiter": ",",
+    "RowDelimiter": null,
+    "EncodingName": null,
+    "CompressionCodec": null,
+    "CompressionLevel": null,
+    "QuoteChar": "\"",
+    "EscapeChar": "\\",
+    "FirstRowAsHeader": false,
+    "NullValue": null,
+    "AdditionalProperties": {
+      "typeProperties": {
+        "location": {
+          "type": "AzureBlobFSLocation",
+          "folderPath": "ecdc/testing",
+          "fileSystem": "processed"
+        },
+        "columnDelimiter": ",",
+        "escapeChar": "\\",
+        "firstRowAsHeader": false,
+        "quoteChar": "\""
+      }
+    },
+    "Description": null,
+    "Structure": null,
+    "Schema": [
+      {
+        "type": "String"
+      },
+      {
+        "type": "String"
+      },
+      {
+        "type": "String"
+      },
+      {
+        "type": "String"
+      },
+      {
+        "type": "String"
+      },
+      {
+        "type": "String"
+      },
+      {
+        "type": "String"
+      },
+      {
+        "type": "String"
+      },
+      {
+        "type": "String"
+      },
+      {
+        "type": "String"
+      },
+      {
+        "type": "String"
+      },
+      {
+        "type": "String"
+      }
+    ],
+    "LinkedServiceName": {
+      "ReferenceName": "ls_adls_covidreportingdl",
+      "Parameters": null
+    },
+    "Parameters": null,
+    "Annotations": [],
+    "Folder": {
+      "Name": "processed"
+    }
+  },
+  "Id": "/subscriptions/f84a2822-7f27-4f44-982c-ca7ca3705fdd/resourceGroups/covid-reporting-rg/providers/Microsoft.DataFactory/factories/covid-reporting-an-datafactory/datasets/ds_processed_testing",
+  "ETag": "8b01a5f1-0000-1100-0000-661c6b9c0000",
+  "ResourceGroupName": "covid-reporting-rg",
+  "DataFactoryName": "covid-reporting-an-datafactory"
+}

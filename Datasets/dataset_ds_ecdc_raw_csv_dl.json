@@ -1,0 +1,62 @@
+{
+  "Name": "ds_ecdc_raw_csv_dl",
+  "Structure": null,
+  "Properties": {
+    "Location": {
+      "FileSystem": "raw",
+      "AdditionalProperties": {},
+      "FolderPath": "ecdc",
+      "FileName": {
+        "value": "@dataset().fileName",
+        "type": "Expression"
+      }
+    },
+    "ColumnDelimiter": ",",
+    "RowDelimiter": null,
+    "EncodingName": null,
+    "CompressionCodec": null,
+    "CompressionLevel": null,
+    "QuoteChar": "\"",
+    "EscapeChar": "\\",
+    "FirstRowAsHeader": true,
+    "NullValue": null,
+    "AdditionalProperties": {
+      "typeProperties": {
+        "location": {
+          "type": "AzureBlobFSLocation",
+          "fileName": {
+            "value": "@dataset().fileName",
+            "type": "Expression"
+          },
+          "folderPath": "ecdc",
+          "fileSystem": "raw"
+        },
+        "columnDelimiter": ",",
+        "escapeChar": "\\",
+        "firstRowAsHeader": true,
+        "quoteChar": "\""
+      }
+    },
+    "Description": null,
+    "Structure": null,
+    "Schema": [],
+    "LinkedServiceName": {
+      "ReferenceName": "ls_adls_covidreportingdl",
+      "Parameters": null
+    },
+    "Parameters": {
+      "fileName": {
+        "Type": "string",
+        "DefaultValue": null
+      }
+    },
+    "Annotations": [],
+    "Folder": {
+      "Name": "raw"
+    }
+  },
+  "Id": "/subscriptions/f84a2822-7f27-4f44-982c-ca7ca3705fdd/resourceGroups/covid-reporting-rg/providers/Microsoft.DataFactory/factories/covid-reporting-an-datafactory/datasets/ds_ecdc_raw_csv_dl",
+  "ETag": "8b01a4f1-0000-1100-0000-661c6b9c0000",
+  "ResourceGroupName": "covid-reporting-rg",
+  "DataFactoryName": "covid-reporting-an-datafactory"
+}

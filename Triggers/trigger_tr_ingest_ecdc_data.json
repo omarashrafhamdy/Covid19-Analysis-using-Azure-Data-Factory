@@ -1,0 +1,49 @@
+{
+  "Name": "tr_ingest_ecdc_data",
+  "RuntimeState": "Stopped",
+  "Properties": {
+    "Recurrence": {
+      "AdditionalProperties": null,
+      "Frequency": "Day",
+      "Interval": 1,
+      "StartTime": "2024-04-14T18:24:00Z",
+      "EndTime": null,
+      "TimeZone": "Egypt Standard Time",
+      "Schedule": {
+        "AdditionalProperties": null,
+        "Minutes": null,
+        "Hours": null,
+        "WeekDays": null,
+        "MonthDays": null,
+        "MonthlyOccurrences": null
+      }
+    },
+    "Pipelines": [
+      {
+        "PipelineReference": {
+          "ReferenceName": "pl_ingest_ecdc_data",
+          "Name": null
+        },
+        "Parameters": {}
+      }
+    ],
+    "AdditionalProperties": {
+      "typeProperties": {
+        "recurrence": {
+          "frequency": "Day",
+          "interval": 1,
+          "startTime": "2024-04-14T18:24:00Z",
+          "timeZone": "Egypt Standard Time",
+          "schedule": {}
+        }
+      }
+    },
+    "Description": null,
+    "RuntimeState": "Stopped",
+    "Annotations": []
+  },
+  "Id": "/subscriptions/f84a2822-7f27-4f44-982c-ca7ca3705fdd/resourceGroups/covid-reporting-rg/providers/Microsoft.DataFactory/factories/covid-reporting-an-datafactory/triggers/tr_ingest_ecdc_data",
+  "ETag": "8901a0a5-0000-1100-0000-661c4b700000",
+  "ResourceGroupName": "covid-reporting-rg",
+  "DataFactoryName": "covid-reporting-an-datafactory"
+}

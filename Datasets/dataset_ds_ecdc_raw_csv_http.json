@@ -1,0 +1,69 @@
+{
+  "Name": "ds_ecdc_raw_csv_http",
+  "Structure": null,
+  "Properties": {
+    "Location": {
+      "RelativeUrl": {
+        "value": "@dataset().raltiveURL",
+        "type": "Expression"
+      },
+      "AdditionalProperties": {},
+      "FolderPath": null,
+      "FileName": null
+    },
+    "ColumnDelimiter": ",",
+    "RowDelimiter": null,
+    "EncodingName": null,
+    "CompressionCodec": null,
+    "CompressionLevel": null,
+    "QuoteChar": "\"",
+    "EscapeChar": "\\",
+    "FirstRowAsHeader": true,
+    "NullValue": null,
+    "AdditionalProperties": {
+      "typeProperties": {
+        "location": {
+          "type": "HttpServerLocation",
+          "relativeUrl": {
+            "value": "@dataset().raltiveURL",
+            "type": "Expression"
+          }
+        },
+        "columnDelimiter": ",",
+        "escapeChar": "\\",
+        "firstRowAsHeader": true,
+        "quoteChar": "\""
+      }
+    },
+    "Description": null,
+    "Structure": null,
+    "Schema": [],
+    "LinkedServiceName": {
+      "ReferenceName": "ls_http_opendata_ecdc_europa_eu",
+      "Parameters": {
+        "sourceBaseURL": {
+          "value": "@dataset().baseURL",
+          "type": "Expression"
+        }
+      }
+    },
+    "Parameters": {
+      "raltiveURL": {
+        "Type": "string",
+        "DefaultValue": null
+      },
+      "baseURL": {
+        "Type": "string",
+        "DefaultValue": null
+      }
+    },
+    "Annotations": [],
+    "Folder": {
+      "Name": "raw"
+    }
+  },
+  "Id": "/subscriptions/f84a2822-7f27-4f44-982c-ca7ca3705fdd/resourceGroups/covid-reporting-rg/providers/Microsoft.DataFactory/factories/covid-reporting-an-datafactory/datasets/ds_ecdc_raw_csv_http",
+  "ETag": "8b018df1-0000-1100-0000-661c6b9c0000",
+  "ResourceGroupName": "covid-reporting-rg",
+  "DataFactoryName": "covid-reporting-an-datafactory"
+}
